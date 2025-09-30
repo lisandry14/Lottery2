@@ -19,24 +19,26 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Instala SDK de Android y acepta licencias
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      # Prepara Gradle (sin necesitar ./gradlew en el repo)
+      # Instala explícitamente lo que necesita compileSdk 34
+      - name: Install Android platform and build-tools
+        run: |
+          sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools"
+
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: 8.7
 
-      # Compilar APK de debug
-      - name: Build Debug APK
-        run: gradle assembleDebug --stacktrace
+      # Log detallado para ver la causa si falla
+      - name: Build Debug APK (verbose)
+        run: gradle assembleDebug --stacktrace --info
 
-      # Subir APK para descargarlo como artifact
       - name: Upload APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
           path: app/build/outputs/apk/debug/*.apk
-
