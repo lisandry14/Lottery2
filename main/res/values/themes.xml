@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.LotteryApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Custom overrides here -->
+    </style>
+</resources>
