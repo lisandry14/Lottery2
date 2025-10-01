@@ -1,22 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#FFFFFFFF">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¡Bienvenida a tu app de Lotería, Liss! 🍀"
-        android:textSize="20sp"
+    <!-- Barra superior: TICKET / JUGADAS -->
+    <LinearLayout
+        android:id="@+id/topTabs"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="#F5F5F5"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/ticketTab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TICKET (0)"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/jugadasTab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="JUGADAS ($0.00)"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Código y hora -->
+    <LinearLayout
+        android:id="@+id/codeTimeRow"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/topTabs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/codeText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ff880"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/app_name"
+            android:src="@android:drawable/ic_lock_idle_alarm" />
+
+        <TextView
+            android:id="@+id/timeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="8:36:21 PM"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Botón verde: ELEGIR SORTEOS -->
+    <Button
+        android:id="@+id/chooseLotteryBtn"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:text="ELEGIR SORTEOS"
+        android:textAllCaps="true"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#A7C000"
+        app:layout_constraintTop_toBottomOf="@id/codeTimeRow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Fila JUGAR / N/A / MONTO -->
+    <LinearLayout
+        android:id="@+id/actionRow"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/chooseLotteryBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/playBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="JUGAR" />
+
+        <Button
+            android:id="@+id/naBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="N/A" />
+
+        <Button
+            android:id="@+id/amountBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="MONTO" />
+    </LinearLayout>
+
+    <!-- Teclado numérico simple -->
+    <GridLayout
+        android:id="@+id/keypad"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="4"
+        android:rowCount="5"
+        android:useDefaultMargins="true"
+        app:layout_constraintTop_toBottomOf="@id/actionRow"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-        
+        android:padding="8dp">
+
+        <!-- Fila 1 -->
+        <Button android:layout_row="0" android:layout_column="0" android:text="7"/>
+        <Button android:layout_row="0" android:layout_column="1" android:text="8"/>
+        <Button android:layout_row="0" android:layout_column="2" android:text="9"/>
+        <Button android:layout_row="0" android:layout_column="3" android:text="⌫" android:id="@+id/backspaceBtn"/>
+
+        <!-- Fila 2 -->
+        <Button android:layout_row="1" android:layout_column="0" android:text="4"/>
+        <Button android:layout_row="1" android:layout_column="1" android:text="5"/>
+        <Button android:layout_row="1" android:layout_column="2" android:text="6"/>
+        <Button android:layout_row="1" android:layout_column="3" android:text="/"/>
+
+        <!-- Fila 3 -->
+        <Button android:layout_row="2" android:layout_column="0" android:text="1"/>
+        <Button android:layout_row="2" android:layout_column="1" android:text="2"/>
+        <Button android:layout_row="2" android:layout_column="2" android:text="3"/>
+        <Button android:layout_row="2" android:layout_column="3" android:text="-"/>
+
+        <!-- Fila 4 -->
+        <Button android:layout_row="3" android:layout_column="0" android:text="0" android:id="@+id/zeroBtn"/>
+        <Button android:layout_row="3" android:layout_column="1" android:text="."/>
+        <Button android:layout_row="3" android:layout_column="2" android:text="OK" android:id="@+id/okBtn"/>
+        <Button android:layout_row="3" android:layout_column="3" android:text="+"/>
+
+        <!-- Fila 5 (opcional, deja espacio) -->
+        <Space android:layout_row="4" android:layout_column="0"
+            android:layout_width="0dp" android:layout_height="0dp"
+            android:layout_columnSpan="4"/>
+    </GridLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
